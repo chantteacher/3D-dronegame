@@ -229,6 +229,14 @@ form{display:flex;flex-wrap:wrap;gap:8px}
   .meta{margin-left:0}
   .panel h2{font-size:26px}
 }
+
+/* 하단 저작권 표시 */
+.site-foot{flex:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 14px;padding:7px 16px;border-top:1px solid var(--line);background:var(--bg);color:var(--muted);font-size:12px;line-height:1.5;text-align:center;position:relative;z-index:6}
+.site-foot a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.site-foot a:hover{color:var(--accent,#c8643b)}
+.site-foot .sep{opacity:.5}
+.sheet{bottom:var(--ft,34px)}
+@media(max-width:640px){.site-foot{font-size:11px;padding:6px 10px}.site-foot .sep{display:none}}
 </style>
 
 </head>
@@ -282,6 +290,12 @@ form{display:flex;flex-wrap:wrap;gap:8px}
       <canvas id="noteCv" aria-label="손글씨 연습장"></canvas>
     </div>
 </div>
+
+<footer class="site-foot" id="siteFoot">
+  <span>© 2026 만든사람: <a href="https://www.instagram.com/chantteacher_math/" target="_blank" rel="noopener noreferrer" title="인스타그램 @chantteacher_math">찬T</a> / 무단 복제·배포 금지</span>
+  <span class="sep">|</span>
+  <span>버전 1.0 · 제작일 2026.10.20</span>
+</footer>
 
 <div class="sheet" id="loginSheet">
   <form class="card" id="loginForm" novalidate>
@@ -646,7 +660,7 @@ const ANG=Math.atan2(-225,275);
 (function(){
   const trunkG=new THREE.CylinderGeometry(.1,.14,.9,6),trunkM=new THREE.MeshLambertMaterial({color:0x6b5440});
   const leafG=new THREE.IcosahedronGeometry(.85,0);
-  const leafM=[0x5f8f45,0x6f9d4f,0x4f7f3f,0x86a85a].map(c=>new THREE.MeshLambertMaterial({color:c,flatShading:true}));
+  const leafM=[0x5f8f45,0x6f9d4f,0x4f7f3f,0x86a85a].map(c=>new THREE.MeshLambertMaterial({color:c}));
   TREES.forEach(([x,y,s],i)=>{
     const t=new THREE.Mesh(trunkG,trunkM);t.position.copy(TO(x,y,.45*s));t.scale.setScalar(s);t.castShadow=true;world.add(t);
     const l=new THREE.Mesh(leafG,leafM[i%4]);l.position.copy(TO(x,y,1.3*s));l.scale.set(s,s*1.15,s);l.rotation.y=i;l.castShadow=true;world.add(l);
